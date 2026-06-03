@@ -40,10 +40,15 @@ export default function DataSourceModal({
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
   const [search, setSearch] = useState("");
 
+  const queryParams = new URLSearchParams(window.location.search);
+
+  const urlQueryParam = queryParams.get("q");
+
   const allItems: DataSourceItem[] = dataSourceRegistry.getAllItems({
     nodeId,
     allNodes,
     allForms,
+    param: urlQueryParam,
   });
 
   const filtered = allItems.filter((item) => {

@@ -1,4 +1,4 @@
-import type { DataSource, DataSourceItem } from './types'
+import type { DataSource, DataSourceContext, DataSourceItem } from './types'
 
 const GLOBAL_FIELDS: { groupLabel: string; fields: string[] }[] = [
   { groupLabel: 'Action Properties', fields: ['action_id', 'action_name', 'created_at'] },
@@ -12,7 +12,8 @@ export const globalPropertiesSource: DataSource = {
     return 'Global Properties'
   },
 
-  getItems(): DataSourceItem[] {
+  getItems(context: DataSourceContext): DataSourceItem[] {
+    if (context.param !== "transitive" && context.param !== null) return [];
     return GLOBAL_FIELDS.flatMap(({ groupLabel, fields }) =>
       fields.map((fieldKey) => ({
         value: `${groupLabel}.${fieldKey}`,

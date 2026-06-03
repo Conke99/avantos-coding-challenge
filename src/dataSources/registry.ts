@@ -1,19 +1,19 @@
-import type { DataSource, DataSourceContext, DataSourceItem } from './types'
+import type { DataSource, DataSourceContext, DataSourceItem } from "./types";
 
 export class DataSourceRegistry {
-  private sources: DataSource[] = []
+  private sources: DataSource[] = [];
 
   register(source: DataSource): void {
-    this.sources.push(source)
+    this.sources.push(source);
   }
 
   getAll(): DataSource[] {
-    return this.sources
+    return this.sources;
   }
 
   getAllItems(context: DataSourceContext): DataSourceItem[] {
-    return this.sources.flatMap((source) => source.getItems(context))
+    return this.sources.flatMap((source) => source.getItems(context));
   }
 }
 
-export const dataSourceRegistry = new DataSourceRegistry()
+export const dataSourceRegistry = new DataSourceRegistry();
